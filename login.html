@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <video autoplay loop muted id="bg-video">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <h1 class="h1">LOGIN NA PRE</h1>
+        <form id="Registerform">
+            <input type="text" placeholder="Username" required id="username" class="username">
+            <input type="password" placeholder="Password" required id="password" class="username">
+           
+            <select name="role" id="role" class="admin">
+                <option value="admin">ADMIN</option>
+                <option value="guest">USER</option>
+            </select>
+            <button type="submit" class="ok">Login</button>
+            <div class="p">
+        <p><a href="forgot.html">forgot</a></p>
+        <p>Don't have an account? <a href="register.html">REGISTER HERE</a></p> 
+        <p>You want to delete? <a href="delete.html">DELETE</a></p>
+        </div>
+         </form>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+
+</html>
