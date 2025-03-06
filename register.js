@@ -5,10 +5,10 @@ document.getElementById("Registerform").addEventListener("submit", async functio
     let password = document.getElementById("password").value;
     let role = document.getElementById("role").value;
 
-    let repo = "your_github_repo";
-    let owner = "your_github_username";
+    let repo = "login";
+    let owner = "jeremy0711630";
     let filePath = "users.json";
-    let token = "your_personal_access_token"; // Secure this in a backend!
+    let token = "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"; // Secure this in a backend!
 
     let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
 
