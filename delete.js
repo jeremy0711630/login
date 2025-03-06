@@ -3,10 +3,10 @@ document.getElementById("deleteform").addEventListener("submit", async function(
 
     let username = document.getElementById("username").value.trim();
 
-    let repo = "your_github_repo";
-    let owner = "your_github_username";
+    let repo = "login";
+    let owner = "jeremy0711630";
     let filePath = "users.json";
-    let token = "your_personal_access_token";
+    let token = "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";
 
     let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
 
