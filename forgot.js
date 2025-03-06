@@ -2,10 +2,10 @@ async function resetPassword() {
     let username = document.getElementById("forgotUsername").value.trim();
     let newPassword = document.getElementById("newPassword").value;
 
-    let repo = "your_github_repo";
-    let owner = "your_github_username";
+    let repo = "login";
+    let owner = "jeremy0711630";
     let filePath = "users.json";
-    let token = "your_personal_access_token";
+    let token = "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";
 
     let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
 
