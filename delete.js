@@ -1,24 +1,28 @@
-document.getElementById("deleteform").addEventListener("submit", function(event){
+document.getElementById("deleteform").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     let username = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value;
-    
 
-     
-    let user = {
-        username: username,
-        password: password,
-        
+    let repo = "your_github_repo";
+    let owner = "your_github_username";
+    let filePath = "users.json";
+    let token = "your_personal_access_token";
+
+    let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
+
+    if (!users[username]) {
+        alert("User not found!");
+        return;
     }
-     let confirm = prompt("you want to delete yes/no")  
-      if(confirm == "yes"){
-        
-    localStorage.removeItem(username, JSON.stringify(user));
-    alert("DELETE SUCCESSFUL!");
-}
-if(confirm == "no"){
-    alert("DELETE CANELED")
-    return;
-}
+
+    let confirmDelete = prompt("Are you sure you want to delete your account? (yes/no)");
+    if (confirmDelete.toLowerCase() !== "yes") {
+        alert("Deletion canceled.");
+        return;
+    }
+
+    delete users[username];
+
+    let success = await updateGitHubFile(repo, owner, filePath, users, token);
+    if (success) alert("Account deleted successfully!");
 });
