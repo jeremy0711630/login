@@ -1,26 +1,20 @@
-function verifyUser() {
-    let username = document.getElementById("forgotUsername").value.trim();
-    let user = localStorage.getItem(username);
-
-    if (user) {
-        alert("User found! You can now reset your password.");
-        document.getElementById("resetPasswordSection").style.display = "block";
-    } else {
-        alert("User not found!");
-    }
-}
-
-function resetPassword() {
+async function resetPassword() {
     let username = document.getElementById("forgotUsername").value.trim();
     let newPassword = document.getElementById("newPassword").value;
 
-    let user = localStorage.getItem(username);
+    let repo = "your_github_repo";
+    let owner = "your_github_username";
+    let filePath = "users.json";
+    let token = "your_personal_access_token";
 
-    if (user) {
-        let parsedUser = JSON.parse(user);
-        parsedUser.password = newPassword;
-        localStorage.setItem(username, JSON.stringify(parsedUser));
-        alert("Password reset successful! Please log in.");
-        window.location.href = "login.html";
+    let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
+
+    if (!users[username]) {
+        alert("User not found!");
+        return;
     }
+
+    users[username].password = newPassword;
+    let success = await updateGitHubFile(repo, owner, filePath, users, token);
+    if (success) alert("Password reset successful! Please log in.");
 }
