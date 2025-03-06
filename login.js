@@ -1,29 +1,20 @@
-document.getElementById("Registerform").addEventListener("submit", function(event) {
+document.getElementById("Loginform").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     let username = document.getElementById("username").value.trim();
     let password = document.getElementById("password").value;
     let role = document.getElementById("role").value;
 
-    let user = localStorage.getItem(username);
+    let repo = "your_github_repo";
+    let owner = "your_github_username";
+    let filePath = "users.json";
+    let token = "your_personal_access_token";
 
-    if (user) {
-        let parsedUser = JSON.parse(user);
+    let users = await fetchUsersFromGitHub(repo, owner, filePath, token);
 
-        if(parsedUser.password === password && parsedUser.role==role) {
-          
-
-            if (parsedUser.role === "admin") {
-                alert("Admin login successful!");
-                
-            }else if (parsedUser.role === "guest") {
-                alert("Guest login successful!");
-                
-            }
-        } else {
-            alert("Incorrect password!");
-        }
+    if (users[username] && users[username].password === password && users[username].role === role) {
+        alert(role.charAt(0).toUpperCase() + role.slice(1) + " login successful!");
     } else {
-        alert("No data found.");
+        alert("Incorrect credentials!");
     }
 });
